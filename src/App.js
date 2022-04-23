@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [users, setUsers] = useState([]);
 
+  // load data 
   useEffect( () => {
     fetch('http://localhost:4000/users')
     .then(res => res.json())
@@ -18,7 +19,6 @@ function App() {
     const user = {name, email};
 
     // post data to server 
-
     fetch('http://localhost:4000/user', {
       method: 'POST', // or 'PUT'
       headers: {
@@ -28,7 +28,9 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Success:', data);
+        const newUsers = [...users, data];
+        setUsers(newUsers)
+        // console.log('Success:', data);
       })
 
   } 
